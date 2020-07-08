@@ -1,0 +1,45 @@
+Docker ID - ramyahubdocker
+ramyarajagopalan@outlook.com
+Azurepassword1$
+**************************************************************************************************************************
+uc2 & 3 - https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough
+UC 4 - https://docs.microsoft.com/en-us/azure/virtual-machines/linux/create-ssh-secured-vm-from-template
+UC5 - https://docs.microsoft.com/en-us/azure/developer/terraform/create-linux-virtual-machine-with-infrastructure
+uc6 - https://azuredevopslabs.com/labs/vstsextend/terraform/
+**************************************************************************************************************************
+Install sonarcloud
+Build new pipeline
+go to sonar.io link
+click on azure devops
+Click yes
+create an organization
+organization key - ramyasonarcloud
+Project key - sonarprojkey
+Create Service Connection for Sonarcloud (in service conn -> Create token from security site in sonarcloud)
+add prepare analysis on sonar cloud task - Project name - sonarproj
+add run task analysis
+Add Guid statement in property file .csprog as it is old .net project
+Run pipeline
+Check sonar output uploaded in Sonar link
+**************************************************************************************************************************
+Install Jfrog
+Install Jfrog Artifactory
+install nugget
+go to jfrog website and create a account
+Uname - jfrogramya/admin
+Pwd - Subssite1$
+Server name - jfrogramyaserver
+Create a service connection - jfrogservice
+add artifactory  generic upload to pipeline
+CHange spec as below:
+      "pattern": "$(build.artifactstagingdirectory)/",
+      "target": "nuget-local/freshfileupload"
+Run pipeline
+Check artifacts uploaded in the link below
+https://jfrogramyaserver.jfrog.io/
+**************************************************************************************************************************
+$resourceGroupname = Read-Host -Prompt "Enter Resource Group Name"
+$adminCreds = Get-Credential -Message "Enter a username and password for the VM administrator."
+$vmName = Read-Host -Prompt "Enter VM name"
+Connect-AzureRmAccount
+New-AzureRmVm -ResourceGroupName $resourceGroupname -Name $vmName -Credential $adminCreds -Image UbuntuLTS
